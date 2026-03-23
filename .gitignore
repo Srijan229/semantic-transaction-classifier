@@ -1,0 +1,8 @@
+eton-ai-backend/node_modules/
+eton-ai-backend/.env
+eton-ai-backend/src/generated/prisma/
+
+eton-ai-frontend/node_modules/
+eton-ai-frontend/.env
+eton-ai-frontend/dist/
+eton-ai-frontend/build/

@@ -1,0 +1,955 @@
+"TRANSACTION_PROMPT_DEFAULT_ETC": {
+    "Prompt": "1. A list of transaction records. Each record has a 'Transaction Description' field. 2. A list of Eton Transaction Codes(ETC), where each entry has an ETC_Code and Description.\n            Your task is to:\n            - For each transaction, semantically match the Transaction Description with the most relevant ETC Description.\n            - Based on the match, assign the corresponding ETC_Code to the transaction.\n            - Add this as a new field: 'ETC Code'",
+    "Default_Etc_Code": [
+      {
+        "ETC_Code": 1,
+        "Name": "Cash Received",
+        "Description": "Deposit into account, non-investment related, but personal in nature or CASH @ 1, PAID THIS ATM FEE ON YOUR BEHALF, FLEX ACCNT, You Bought CASH"
+      },
+      {
+        "ETC_Code": 2,
+        "Name": "Securities Received",
+        "Description": "Free receipt of investments into the account (non-cash), Security Deposit"
+      },
+      {
+        "ETC_Code": 3,
+        "Name": "Cash Disbursement",
+        "Description": "Disbursement (withdrawal) from account, including payment of personal (not Investment or account Related) expenses, WEB INITIATED PAYMENT AT ONLINE PAYROLL,WITHDRAWAL, You Sold CASH"
+      },
+      {
+        "ETC_Code": 4,
+        "Name": "Securities Delivered",
+        "Description": "Free delivery of investments with No realized gain, Security Withdrawal"
+      },
+      {
+        "ETC_Code": 5,
+        "Name": "Income - Dividend",
+        "Description": "Cash dividends received or Dividends & Interest"
+      },
+      {
+        "ETC_Code": 6,
+        "Name": "Income - Interest",
+        "Description": "Cash interest received on bonds & fixed income (see ETC 115/117 for private loans interest), Interest Earned"
+      },
+      {
+        "ETC_Code": 7,
+        "Name": "Income - Private Equity / Partnership / Other",
+        "Description": "Income distributions received from funds, partnerships"
+      },
+      {
+        "ETC_Code": 8,
+        "Name": "Advisor Fees",
+        "Description": "Advisory fees, not used in calculation of performance before management fees"
+      },
+      {
+        "ETC_Code": 9,
+        "Name": "Manager Fees",
+        "Description": "Investment management fees charged at account level. These are used to calculate performance before management fees"
+      },
+      {
+        "ETC_Code": 10,
+        "Name": "Custody & Trust Fees",
+        "Description": "Custody and other account maintenance fees charged at account level"
+      },
+      {
+        "ETC_Code": 11,
+        "Name": "Other Acct-level Expenses",
+        "Description": "Other, non-investment specific expenses charged at account level (eg, wire fees)"
+      },
+      {
+        "ETC_Code": 12,
+        "Name": "Taxes - investment related",
+        "Description": "Taxes paid on income of investments, such as foreign tax withheld"
+      },
+      {
+        "ETC_Code": 13,
+        "Name": "Purchases",
+        "Description": "Buy security, asset, fund, or partnership, Automatic Investment, Dividend Reinvestment, Automatic Investment BANK DEPOSIT PROGRAM, 12.72% NATIXIS RC on UBS Group AG Rg, L'Oreal S.A. & Siemens AG Rg  2025 - 17.02.2026, PIMCO Funds Global Investors Series PLC Income Fund (USD)"
+      },
+      {
+        "ETC_Code": 14,
+        "Name": "Sales",
+        "Description": "Sell security, asset, fund, or partnership or Automatic Redemption BANK DEPOSIT PROGRAM or PRINCIPAL PAYDOWN, Automatic Redemption, Sale, Security Sale"
+      },
+      {
+        "ETC_Code": 16,
+        "Name": "FX Cross",
+        "Description": "For FX Transactions in MCCYv2 - not yet operational"
+      },
+      {
+        "ETC_Code": 17,
+        "Name": "Short Term Capital Gains Distribution",
+        "Description": "Dividend or distribution specifically identified as ST Cap Gain (typically from mutual funds)"
+      },
+      {
+        "ETC_Code": 18,
+        "Name": "Long Term Capital Gains Distribution",
+        "Description": "Dividend or distribution specifically identified as LT Cap Gain (typically from mutual funds)"
+      },
+      {
+        "ETC_Code": 19,
+        "Name": "Write-Offs",
+        "Description": "To book Write Offs or loss in Investment"
+      },
+      {
+        "ETC_Code": 20,
+        "Name": "MTM-Derivatives",
+        "Description": "Short-term Realised Gain or Loss from periodic settlement of Derivatives Contracts (such as daily settling Future Contracts)"
+      },
+      {
+        "ETC_Code": 23,
+        "Name": "Stock Split",
+        "Description": "Including stock dividends and reverse splits representing a quantity increase/decrease with no Market Value change (tax cost to be spread to all tax lots)"
+      },
+      {
+        "ETC_Code": 24,
+        "Name": "CAPS Proceeds",
+        "Description": "Specific to BNYM txns, misc income on Corp Action txns (eg, cash in lieu)"
+      },
+      {
+        "ETC_Code": 25,
+        "Name": "CAPS Retain",
+        "Description": "Specific to BNYM txns, misc income on Corp Action txns (eg, cash in lieu)"
+      },
+      {
+        "ETC_Code": 26,
+        "Name": "Cost Basis Adjustment",
+        "Description": "To adjust the book cost of a position only (no units change) No net performance impact"
+      },
+      {
+        "ETC_Code": 27,
+        "Name": "Unit Adjustment",
+        "Description": "To adjust units (including for prior errors), no Market Value or Cost change. Will have current day performance impact from Mark to Market valuation"
+      },
+      {
+        "ETC_Code": 28,
+        "Name": "Cost Adjustment to PnL",
+        "Description": "To adjust the book cost of a position only (no units change) with no performance impact in current period"
+      },
+      {
+        "ETC_Code": 30,
+        "Name": "Recallable Income Distribution",
+        "Description": "Income distributions received from funds, partnerships that are recallable in the future as a capital contribution"
+      },
+      {
+        "ETC_Code": 31,
+        "Name": "Recallable Capital Distribution",
+        "Description": "Capital distributions received from funds, partnerships that are recallable in the future as a capital contribution"
+      },
+      {
+        "ETC_Code": 33,
+        "Name": "Record Fund Income Allocations to Cost Basis",
+        "Description": "To record Realized PnL allocations the are to be book against tax cost basis of the Fund"
+      },
+      {
+        "ETC_Code": 34,
+        "Name": "Record Fund Mgmt/Perf Fees to Cost Basis",
+        "Description": "To record Fund Fees on contrib/dsitrib, mgmt or performance - non-cash because on contrib/distrb cash is recorded with those ETCs"
+      },
+      {
+        "ETC_Code": 35,
+        "Name": "Distribution to Beneficiary",
+        "Description": "Cash disbursement to a trust beneficiary"
+      },
+      {
+        "ETC_Code": 36,
+        "Name": "Securities Received - Accrued Interest",
+        "Description": "Accrued interest value on a free receipt of investments (non-cash)"
+      },
+      {
+        "ETC_Code": 37,
+        "Name": "Securities Delivered - Accrued Interest",
+        "Description": "Accrued interest value on a free delivery of investments (non-cash)"
+      },
+      {
+        "ETC_Code": 38,
+        "Name": "Record Fund Unrealized Income Allocations",
+        "Description": "Record Fund Income/Gain Allocations or Change in Market Value"
+      },
+      {
+        "ETC_Code": 39,
+        "Name": "Record Fund Mgmt/Perf Fees",
+        "Description": "Non-accounting transaction to recognize management fees in the Before Fees performance calcs. Represents fee amounts buried in other numbers."
+      },
+      {
+        "ETC_Code": 41,
+        "Name": "Inflow to Income from Principal cash acct",
+        "Description": "Inflow to Principal cash acct from Income"
+      },
+      {
+        "ETC_Code": 42,
+        "Name": "Transfer to Principal from Income",
+        "Description": "Inflow to Income cash acct from Principal"
+      },
+      {
+        "ETC_Code": 43,
+        "Name": "Transfer from Income to Principal",
+        "Description": "Outflow side from Income for ETC42"
+      },
+      {
+        "ETC_Code": 44,
+        "Name": "Transfer from Principal to Income",
+        "Description": "Outflow side from Principal for ETC41"
+      },
+      {
+        "ETC_Code": 45,
+        "Name": "Ignore Transaction",
+        "Description": "No code found - ignore transaction"
+      },
+      {
+        "ETC_Code": 47,
+        "Name": "Beginning Asset Balance",
+        "Description": "To load beginning balance for investment positions"
+      },
+      {
+        "ETC_Code": 48,
+        "Name": "Reversal - Source System Generated",
+        "Description": "BNYM specific ETC, to reverse CAPS txns"
+      },
+      {
+        "ETC_Code": 50,
+        "Name": "No Code",
+        "Description": "No code found - error to be resolved"
+      },
+      {
+        "ETC_Code": 51,
+        "Name": "Capital Commitment",
+        "Description": "Non-accounting transaction to recognize the original commitment amount to an investment fund. Commitments are formal obligations of investor to pay in capital when called by the fund. Commitments are typically made at the front end of the fund or in conjunction with the first contribution."
+      },
+      {
+        "ETC_Code": 52,
+        "Name": "Adjustment to Unfunded Commitment",
+        "Description": "Non-accounting transaction to adjust the unfunded commitment amount directly, possibly due to a mischaracterized recallable distribution or capital call which impacts the unfunded commitment."
+      },
+      {
+        "ETC_Code": 53,
+        "Name": "Capital Call - Estimated",
+        "Description": "Non-accounting transaction to estimate the capital contribution amount to an investment fund."
+      },
+      {
+        "ETC_Code": 54,
+        "Name": "Return of Capital - Estimated",
+        "Description": "Non-accounting transaction to estimate the capital distribution amount from an investment fund."
+      },
+      {
+        "ETC_Code": 55,
+        "Name": "Budgeted Expense",
+        "Description": "Non-accounting transaction to estimate an investment fund expense for budgeting purposes."
+      },
+      {
+        "ETC_Code": 56,
+        "Name": "Capital Commitment Adjustment",
+        "Description": "Non-accounting transaction to adjust the original capital commitment (increase or decrease) due to the fund changing the investors' overall commitment obligation."
+      },
+      {
+        "ETC_Code": 57,
+        "Name": "Intra Entity Transfer OUT - NonCash",
+        "Description": "Investment transfer to other Entity."
+      },
+      {
+        "ETC_Code": 58,
+        "Name": "Intra Entity Transfer IN - NonCash",
+        "Description": "Investment transfer from other Entity."
+      },
+      {
+        "ETC_Code": 60,
+        "Name": "Intra Entity Transfer – Cash",
+        "Description": "Cash transfer between entities."
+      },
+      {
+        "ETC_Code": 61,
+        "Name": "Capital Contribution - no units",
+        "Description": "Additional capital called by partnership investment, with no additional units involved. or Employee Contributions"
+      },
+      {
+        "ETC_Code": 62,
+        "Name": "Misc Investment Expenses",
+        "Description": "Other investment-related expenses (assigned to specific CUSIP)."
+      },
+      {
+        "ETC_Code": 69,
+        "Name": "Investor Taxes Paid vs Cost Basis",
+        "Description": "Record, as an allocation, taxes paid or withheld on behalf of an investor. This ETC will adjust the cost basis of the position."
+      },
+      {
+        "ETC_Code": 70,
+        "Name": "Fund Income Distribution vs Cost Basis",
+        "Description": "Record Fund Income Distributions in cash and reduce cost basis of asset. Similar to ETC 73, but for income distributions vs return of capital."
+      },
+      {
+        "ETC_Code": 71,
+        "Name": "Purchase Accrued Interest",
+        "Description": "Amount of accrued interest purchased when buying a bond, treated as negative income."
+      },
+      {
+        "ETC_Code": 72,
+        "Name": "Sell Short",
+        "Description": "Sell short, including writing options (eg, writing covered calls)."
+      },
+      {
+        "ETC_Code": 73,
+        "Name": "Return of Capital - no units",
+        "Description": "Cash capital distribution, with no units involved in the transaction. or Withdrawals"
+      },
+      {
+        "ETC_Code": 74,
+        "Name": "Sell Accrued Interest",
+        "Description": "Amount of accrued interest sold when selling a bond, treated as income."
+      },
+      {
+        "ETC_Code": 75,
+        "Name": "Maturity",
+        "Description": "Closing out of a position in a fixed income instrument (like a sale at par value). See separate ETCs for private loan txns."
+      },
+      {
+        "ETC_Code": 77,
+        "Name": "Option Expiration Long",
+        "Description": "Option expiration at 0 price/MV for long positions."
+      },
+      {
+        "ETC_Code": 78,
+        "Name": "Option Expiration Short",
+        "Description": "Option expiration at 0 price/MV for short positions."
+      },
+      {
+        "ETC_Code": 79,
+        "Name": "Option Exercise Long Call",
+        "Description": "Option exercise, this closes the Long Call position, see ETC 87."
+      },
+      {
+        "ETC_Code": 81,
+        "Name": "Buy to cover Short",
+        "Description": "Purchase transaction to close a short position."
+      },
+      {
+        "ETC_Code": 82,
+        "Name": "Merger / Reorg / Spin - Trans In",
+        "Description": "For various corporate actions where account receives securities/positions. This is the non-cash portion representing the Unit, Market Value and Tax Cost at the time of transfer."
+      },
+      {
+        "ETC_Code": 83,
+        "Name": "Merger / Reorg / Spin - Trans Out",
+        "Description": "For various corporate actions where account delivers securities/positions. This is the non-cash portion representing the Unit, Market Value and Tax Cost at the time of transfer."
+      },
+      {
+        "ETC_Code": 85,
+        "Name": "Bond Accretion of Discount",
+        "Description": "Non-cash transaction for accretion of bond discount (Note: affects both Princ & Income)."
+      },
+      {
+        "ETC_Code": 86,
+        "Name": "Bond Amortization of Premium",
+        "Description": "Non-cash transaction for amortization of bond premium (Note: affects both Princ & Income)."
+      },
+      {
+        "ETC_Code": 87,
+        "Name": "Stock Purchase on Option Exercise",
+        "Description": "Stock purchase related to a Long call or short put option exercise/assign transaction."
+      },
+      {
+        "ETC_Code": 89,
+        "Name": "Option Assign Short Call",
+        "Description": "Option assign, this closes the Short Call position, see ETC 88."
+      },
+      {
+        "ETC_Code": 90,
+        "Name": "Option Assign Short Put",
+        "Description": "Option assign, this closes the Short Put position, see ETC 87."
+      },
+      {
+        "ETC_Code": 91,
+        "Name": "Revenue at account level",
+        "Description": "Cash transfer between entities – this is outbound side."
+      },
+      {
+        "ETC_Code": 92,
+        "Name": "Personal Expenses",
+        "Description": "Similar to Cash Disbursement, specifically labelled ETC."
+      },
+      {
+        "ETC_Code": 95,
+        "Name": "Beginning Balance Adjustment",
+        "Description": "To adjust the beginning balance of an investment position."
+      },
+      {
+        "ETC_Code": 96,
+        "Name": "Partnership Contribution Non-Cash",
+        "Description": "Purchase of partnership interest via an in-kind (non-cash) contribution. The in-kind securities delivery component is processed with ETC 4."
+      },
+      {
+        "ETC_Code": 97,
+        "Name": "Partnership Distribution Non-Cash",
+        "Description": "Distribution from a partnership investment via an in-kind (non-cash) distribution. The in-kind securities receipt component is processed with ETC 2."
+      },
+      {
+        "ETC_Code": 98,
+        "Name": "Commit to Purchase",
+        "Description": "Similar to Purchase, but at unknown units & unit value. Just booking the transaction amount with expectation that this will be reversed and replaced with a regular purchase ETC."
+      },
+      {
+        "ETC_Code": 99,
+        "Name": "Commit to Sale",
+        "Description": "Similar to Sell, but at unknown units & unit value. Just booking the transaction amount with expectation that this will be reversed and replaced with a regular sale ETC."
+      },
+      {
+        "ETC_Code": 100,
+        "Name": "Private Equity – Interest Income",
+        "Description": "Interest Income related to PF Funds."
+      },
+      {
+        "ETC_Code": 101,
+        "Name": "Private Equity – Dividend Income",
+        "Description": "Dividend Income related to PE Funds"
+      },
+      {
+        "ETC_Code": 102,
+        "Name": "Private Equity – Expenses",
+        "Description": "Expenses related to PE Funds"
+      },
+      {
+        "ETC_Code": 103,
+        "Name": "Private Equity - Capitalized Expenses",
+        "Description": "Capitalized Expenses related to PE Funds"
+      },
+      {
+        "ETC_Code": 104,
+        "Name": "Foreign Currency Cash Receipt",
+        "Description": "Cash receipt in foreign currency"
+      },
+      {
+        "ETC_Code": 105,
+        "Name": "Foreign Currency Cash Disbursement",
+        "Description": "Cash disbursement in foreign currency"
+      },
+      {
+        "ETC_Code": 106,
+        "Name": "Cap Call for Expenses Fee - Outside Commitment",
+        "Description": "Fund/partnership capital call for Fund Expenses that does not impact the remaining commitment amount"
+      },
+      {
+        "ETC_Code": 107,
+        "Name": "Cap Call for Expenses Inside Commitment",
+        "Description": "Fund/partnership capital call for Fund Expenses that reduced the remaining commitment amount"
+      },
+      {
+        "ETC_Code": 108,
+        "Name": "Cap Call for Manager Fee - Outside Commitment",
+        "Description": "Fund/partnership capital call for Management Fees that does not impact the remaining commitment amount"
+      },
+      {
+        "ETC_Code": 109,
+        "Name": "Cap Call for Manager Fee - Inside Commitment",
+        "Description": "Fund/partnership capital call for Management Fees that reduced the remaining commitment amount"
+      },
+      {
+        "ETC_Code": 110,
+        "Name": "Interest Expense at account level",
+        "Description": "Interest Expense, non-investment specific, charged at account level"
+      },
+      {
+        "ETC_Code": 111,
+        "Name": "Originate Loan - Lender",
+        "Description": "Initial draw by borrower on the books of the lender for a private loan"
+      },
+      {
+        "ETC_Code": 112,
+        "Name": "Originate Loan - Borrower",
+        "Description": "Initial draw by borrower on the books of the borrower for a private loan (carried as a short/liability position)"
+      },
+      {
+        "ETC_Code": 113,
+        "Name": "Loan Draw - Lender",
+        "Description": "Secondary draws by borrower on the books of the lender for a private loan"
+      },
+      {
+        "ETC_Code": 114,
+        "Name": "Loan Draw  - Borrower",
+        "Description": "Secondary draws by borrower on the books of the borrower for a private loan (carried as a short/liability position)"
+      },
+      {
+        "ETC_Code": 115,
+        "Name": "Loan Payment Principal - Lender",
+        "Description": "Paydown of loan balance by borrower on the books of the lender"
+      },
+      {
+        "ETC_Code": 116,
+        "Name": "Loan Payment Principal - Borrower",
+        "Description": "Paydown of loan balance by borrower on the books of the borrower"
+      },
+      {
+        "ETC_Code": 117,
+        "Name": "Loan Payment Interest - Lender",
+        "Description": "Receipt of interest due on loan balance on books of lender (income)"
+      },
+      {
+        "ETC_Code": 118,
+        "Name": "Loan Payment Interest - Borrower",
+        "Description": "Payment of interest due on loan balance on books of lender (expense)"
+      },
+      {
+        "ETC_Code": 119,
+        "Name": "PIK Interest Payment - Lender",
+        "Description": "Non-cash portion of PIK Loan interest payment"
+      },
+      {
+        "ETC_Code": 120,
+        "Name": "PIK Interest Payment - Borrower",
+        "Description": "Non-cash portion of PIK Loan interest payment"
+      },
+      {
+        "ETC_Code": 121,
+        "Name": "Loan Fee - Expense",
+        "Description": "Origination fee, late fees, service fees paid on books of borrower (expense)"
+      },
+      {
+        "ETC_Code": 122,
+        "Name": "Loan Fee - Income",
+        "Description": "Origination fee, late fees, service fees received on books of lender (income)"
+      },
+      {
+        "ETC_Code": 123,
+        "Name": "Settle-Cash In",
+        "Description": "Transmission of a Cash Deposit through Client Bill Pay - Accrual Entities Only"
+      },
+      {
+        "ETC_Code": 124,
+        "Name": "Settle-Cash Out",
+        "Description": "Transmission of a Cash Disbursement through Client Bill Pay - Accrual Entities Only"
+      },
+      {
+        "ETC_Code": 127,
+        "Name": "MTM - Unreal GL on Short",
+        "Description": "System-generated out of the MTM routine"
+      },
+      {
+        "ETC_Code": 128,
+        "Name": "MTM - Unreal Income on Short",
+        "Description": "System-generated out of the MTM routine"
+      },
+      {
+        "ETC_Code": 129,
+        "Name": "MTM - Unreal GL",
+        "Description": "System-generated out of the MTM routine"
+      },
+      {
+        "ETC_Code": 130,
+        "Name": "MTM - Unreal Income",
+        "Description": "System-generated out of the MTM routine"
+      },
+      {
+        "ETC_Code": 131,
+        "Name": "Beginning Liability Balance",
+        "Description": "To load a short (liability) investment position"
+      },
+      {
+        "ETC_Code": 132,
+        "Name": "Void",
+        "Description": "Transaction Voided - no longer considered in system"
+      },
+      {
+        "ETC_Code": 133,
+        "Name": "Entity Avg Cost Adj-Open",
+        "Description": "Adjusts tax cost of a position for the average cost across accounts in an Entity for Purchases (no units change and no net performance impact)"
+      },
+      {
+        "ETC_Code": 134,
+        "Name": "Realized Gain Loss Reclass",
+        "Description": "Non-accounting transaction to adjust the original realized gain loss due from a sale of an asset"
+      },
+      {
+        "ETC_Code": 135,
+        "Name": "FX Cash Realized Gain",
+        "Description": "To record the realized gain loss on the foreign currency conversion of cash"
+      },
+      {
+        "ETC_Code": 136,
+        "Name": "Realized Gain Loss Reclass on short",
+        "Description": "Non-accounting transaction to adjust the original realized gain loss on the cover of a short/optioned asset"
+      },
+      {
+        "ETC_Code": 140,
+        "Name": "Capital Contribution - unitary fund",
+        "Description": "Additional capital called by partnership investment, with no additional units involved"
+      },
+      {
+        "ETC_Code": 141,
+        "Name": "Return of Capital - unitary fund",
+        "Description": "Cash capital distribution, with no units involved in the transaction"
+      },
+      {
+        "ETC_Code": 142,
+        "Name": "Recallable Capital Distribution - unitary fund",
+        "Description": "Capital distributions received from funds, partnerships that are recallable in the future as a capital contribution"
+      },
+      {
+        "ETC_Code": 143,
+        "Name": "Partnership Contribution non-cash - unitary fund",
+        "Description": "Purchase of partnership interest via an in-kind (non-cash) contribution. The In-kind securities delivery component is processed with ETC 4"
+      },
+      {
+        "ETC_Code": 144,
+        "Name": "Partnership Distribution non-cash - unitary fund",
+        "Description": "Distribution from a partnership investment via an in-kind (non-cash) distribution. The In-kind securities receipt component is processed with ETC 2"
+      },
+      {
+        "ETC_Code": 145,
+        "Name": "Corp Action Cash Received",
+        "Description": "Cash-in-lieu of fractional shares or Cash received in a merger, spin-off or other corporate action"
+      },
+      {
+        "ETC_Code": 146,
+        "Name": "Corp Action Cash Paid",
+        "Description": "Cash paid in association with a corp actions – eg merger, spin-off – that will serve as additional cost basis on units received"
+      },
+      {
+        "ETC_Code": 154,
+        "Name": "Securities Delivered",
+        "Description": "Free delivery of investments with Realized gain"
+      },
+      {
+        "ETC_Code": 199,
+        "Name": "Period End Close",
+        "Description": "To book year-end close that zeros out Income & Expense GL accounts to Capital"
+      },
+      {
+        "ETC_Code": 212,
+        "Name": "Taxes - Account-Level",
+        "Description": "Non-Investment related Taxes"
+      },
+      {
+        "ETC_Code": 213,
+        "Name": "Tax Refund - Account - Level",
+        "Description": "Non-Investment Related Tax Refunds"
+      },
+      {
+        "ETC_Code": 214,
+        "Name": "Tax Withheld at Source",
+        "Description": "Tax Withheld at Source, as a deducted amount. Recording applicable taxes withheld at the point of income generation in compliance with jurisdictional regulations"
+      },
+      {
+        "ETC_Code": 233,
+        "Name": "Entity Avg Cost Adj-Close",
+        "Description": "Adjusts tax cost of a position for the average cost across accounts in an Entity for Sales (no units change and no net performance impact)"
+      },
+      {
+        "ETC_Code": 243,
+        "Name": "TaxLot Adj",
+        "Description": "Cost and Gain loss adjustment from Tax lot offset"
+      },
+      {
+        "ETC_Code": 292,
+        "Name": "Beginning Balance - Depreciable Asset",
+        "Description": "Beginning Balance - Depreciable Asset"
+      },
+      {
+        "ETC_Code": 293,
+        "Name": "Depreciation Expense",
+        "Description": "Non-cash transaction for depreciation expense on non-security Asset"
+      },
+      {
+        "ETC_Code": 294,
+        "Name": "Sale - Depreciable Asset",
+        "Description": "Sale - Depreciable Asset"
+      },
+      {
+        "ETC_Code": 295,
+        "Name": "Purchase - Depreciable Asset",
+        "Description": "Purchase - Depreciable Asset"
+      },
+      {
+        "ETC_Code": 299,
+        "Name": "Accounting Reclass",
+        "Description": "Non-cash transaction for reclassification of income/expense items in GL - no performance impact"
+      },
+      {
+        "ETC_Code": 301,
+        "Name": "Cap Contributions",
+        "Description": "Capital Contribution (aka Subscription) in cash, not associated with a capital call"
+      },
+      {
+        "ETC_Code": 302,
+        "Name": "Cap Call Contributions",
+        "Description": "Cap Call Contributions for investment principal. This will decrease the unfunded (remaining) commitment."
+      },
+      {
+        "ETC_Code": 303,
+        "Name": "Cap Call for Mgmt Fees",
+        "Description": "Cap Call for Mgmt Fees"
+      },
+      {
+        "ETC_Code": 304,
+        "Name": "Cap Call for Fund Expenses",
+        "Description": "Cap Call for Fund Expenses"
+      },
+      {
+        "ETC_Code": 305,
+        "Name": "Contribution in Kind",
+        "Description": "Capital Contribution in the form of property (securities or other assets)"
+      },
+      {
+        "ETC_Code": 306,
+        "Name": "Cap Call for Mgmt Fees- Outside Commitment",
+        "Description": "Cap Call for Mgmt Fees"
+      },
+      {
+        "ETC_Code": 307,
+        "Name": "Cap Call for Fund Expenses- Outside Commitment",
+        "Description": "Cap Call for Fund Expenses"
+      },
+      {
+        "ETC_Code": 308,
+        "Name": "Distribution Tax Withheld",
+        "Description": "Tax Withholding on Distribution, as an offset amount. The Capital Distribution should reflect the Net distributed to the investor"
+      },
+      {
+        "ETC_Code": 309,
+        "Name": "Placement/Load/Sales Fee on Contrib",
+        "Description": "Fees charged on capital contributions, reduces amount of capital credited to the investor account (non-cash, because cash comes in on 301-304 ETCs)"
+      },
+      {
+        "ETC_Code": 310,
+        "Name": "Capital Distribution",
+        "Description": "Capital Distribution also called a redemption. When fund distributes cash to the investor(s)."
+      },
+      {
+        "ETC_Code": 311,
+        "Name": "ROC Distributions",
+        "Description": "Return Of Capital Distributions that are characterized as a return of original invested capital (not income or gains earned by the fund)."
+      },
+      {
+        "ETC_Code": 312,
+        "Name": "Recallable Distributions",
+        "Description": "Recallable Capital Distributions, typically a capital distribution though may include income/gains distributions. This is used under commitment tracking when the fund distributes cash that may be re-called (as a cap call) at a later date. Recallable distributions increase the Unfunded Commitment amount."
+      },
+      {
+        "ETC_Code": 313,
+        "Name": "Income/Gain Distributions",
+        "Description": "Income/Gain Distributions, as distinguished from a Capital Distribution, this represents profit of the fund (ordinary income or capital gains)."
+      },
+      {
+        "ETC_Code": 314,
+        "Name": "Tax Withholding on Distribution",
+        "Description": "Tax Withholding on Distribution, as an allocated amount. The Capital Distribution should reflect the Net Money distributed to the investor, which this ETC is used to record, similar to an allocation, the amount that is withheld on investor behalf to be paid to the tax authority."
+      },
+      {
+        "ETC_Code": 315,
+        "Name": "Distribution in Kind",
+        "Description": "Capital Distribution in the form of property (securities or other assets)"
+      },
+      {
+        "ETC_Code": 316,
+        "Name": "Management Fee Distribution to GP",
+        "Description": "Capital Distribution of Mgmt Fee to GP"
+      },
+      {
+        "ETC_Code": 317,
+        "Name": "Performance Fee Distribution to GP",
+        "Description": "Capital Distribution of Performance Fee to GP"
+      },
+      {
+        "ETC_Code": 319,
+        "Name": "Early Redemption Fee on Distrib",
+        "Description": "Fees charged on capital distributions, reduces amount of capital in investor account (non-cash, because cash comes in on 310–314 ETCs)"
+      },
+      {
+        "ETC_Code": 320,
+        "Name": "Alloc of Change in NAV",
+        "Description": "Alloc of Change in NAV – net realized & unrealized income, gain & loss as single amount"
+      },
+      {
+        "ETC_Code": 321,
+        "Name": "Alloc of Realized Net Income",
+        "Description": "Alloc of Realized Net Income – include income, gain/loss"
+      },
+      {
+        "ETC_Code": 322,
+        "Name": "Alloc of Realized Gains/Losses",
+        "Description": "Alloc of Realized Gains/Losses"
+      },
+      {
+        "ETC_Code": 323,
+        "Name": "Allocation of Unrealized Net Income",
+        "Description": "Allocation of Unrealized Net Income"
+      },
+      {
+        "ETC_Code": 324,
+        "Name": "Allocation of Unrealized Gain/Loss",
+        "Description": "Allocation of Unrealized Gain/Loss"
+      },
+      {
+        "ETC_Code": 325,
+        "Name": "Alloc of Management Fees",
+        "Description": "Alloc of Management Fees"
+      },
+      {
+        "ETC_Code": 326,
+        "Name": "Alloc of Performance Fees",
+        "Description": "Alloc of Performance Fees"
+      },
+      {
+        "ETC_Code": 327,
+        "Name": "Alloc of Realized Net Income to Cost Basis",
+        "Description": "Alloc of Realized Net Income – include income, gain/loss – book to cost basis, rather than unrealized"
+      },
+      {
+        "ETC_Code": 328,
+        "Name": "Alloc of Mgmt/Perf Fees to Cost Basis",
+        "Description": "Alloc of Mgmt/Perf Fees to Cost Basis – book to cost basis, rather than unrealized. To be used in cases where the tax capital balance is to be adjusted for economic P&L."
+      },
+      {
+        "ETC_Code": 329,
+        "Name": "Alloc of Accrued Performance Fees",
+        "Description": "Allocation of Accrued Performance Fees. Some methods record the fee as earned when booked, which then may be withdrawn by the GP. Another method provides for accruing the fee, which may be subject to claw backs, and then booked as earned (crystallized) at year-end, at which time they may be withdrawn. When ETC39 is used, allocation must effectively reduce the accrual amount as it is rebooked as ETC 326."
+      },
+      {
+        "ETC_Code": 330,
+        "Name": "Transfer of Cap Bal In",
+        "Description": "Non-cash transfer of balance between investors – Inbound side"
+      },
+      {
+        "ETC_Code": 331,
+        "Name": "Transfer of Cap Bal Out",
+        "Description": "Non-cash transfer of balance between investors – Outbound side"
+      },
+      {
+        "ETC_Code": 332,
+        "Name": "Adjust Capital Balance",
+        "Description": "Adjustment to Book/MV capital balance"
+      },
+      {
+        "ETC_Code": 333,
+        "Name": "Unit Reallocation",
+        "Description": "Adjust units for single investor or re-allocate units at new unit value across fund or class"
+      },
+      {
+        "ETC_Code": 334,
+        "Name": "Transfer of Cap Bal, unitary – In",
+        "Description": "Non-cash transfer of balance and units between investors – Inbound side"
+      },
+      {
+        "ETC_Code": 335,
+        "Name": "Transfer of Cap Bal, unitary – Out",
+        "Description": "Non-cash transfer of balance and units between investors – Outbound side"
+      },
+      {
+        "ETC_Code": 341,
+        "Name": "Capital Commitment",
+        "Description": "Capital Commitment – non-cash, no impact on capital balance, no GL entries. Just recording of commitment amount"
+      },
+      {
+        "ETC_Code": 342,
+        "Name": "Reduction of Commitment",
+        "Description": "Reduction of Commitment – Non-accounting transaction to adjust the original capital commitment (increase or decrease) due to the fund changing the investors' overall commitment obligation."
+      },
+      {
+        "ETC_Code": 343,
+        "Name": "Adjustment to Unfunded Commitment",
+        "Description": "Adjustment to unfunded commitment. Use when other txns that impact unfunded commitments (eg, cap calls, ROC distrib) need to adjust unfunded in some other way than the full amount of txn. This allows for a separate adjustment entry."
+      },
+      {
+        "ETC_Code": 345,
+        "Name": "Alloc of Tax Items affecting capital balance",
+        "Description": "Allocation of unrealized or memo allocation amounts that do not impact the tax-basis capital account on the K-1"
+      },
+      {
+        "ETC_Code": 346,
+        "Name": "Alloc of Tax Items not affecting capital balance",
+        "Description": "Allocation of realized allocation amounts that impact the tax-basis capital account on the K-1"
+      },
+      {
+        "ETC_Code": 347,
+        "Name": "High Water Mark Adjustment",
+        "Description": "To adjust the High Water Mark (HWM) up or down. Only used for Fund that have performance fees with high-water mark computations. Typically, the HWM is calculated from inception-to-date net capital flows plus positive P&L allocations. Should inception-to-date amounts not yield correct HWM, use this ETC to adjust the HWM."
+      },
+      {
+        "ETC_Code": 351,
+        "Name": "Cap Contributions – unitary fund",
+        "Description": "Capital Contribution"
+      },
+      {
+        "ETC_Code": 352,
+        "Name": "Capital Call Contributions – unitary fund",
+        "Description": "Cap Call Contributions (investment principal)"
+      },
+      {
+        "ETC_Code": 355,
+        "Name": "Contribution in Kind – unitary fund",
+        "Description": "Capital Contribution in the form of property (securities or other assets) into a unitary fund"
+      },
+      {
+        "ETC_Code": 360,
+        "Name": "Capital Distribution – Unitary fund",
+        "Description": "Capital Redemption"
+      },
+      {
+        "ETC_Code": 361,
+        "Name": "ROC Distributions – unitary fund",
+        "Description": "ROC Distributions, from a fund, partnership, Common Trust Fund, etc. This maps to Sale with optional Gain/Loss on investors books"
+      },
+      {
+        "ETC_Code": 362,
+        "Name": "Recallable Distributions – unitary fund",
+        "Description": "Recallable Distributions"
+      },
+      {
+        "ETC_Code": 365,
+        "Name": "Distribution in Kind – unitary fund",
+        "Description": "Capital Distribution in the form of property (securities or other assets) from a unitary fund"
+      },
+      {
+        "ETC_Code": 401,
+        "Name": "Discr Beneficiary Distribution from Trust",
+        "Description": "Beneficiary Distribution from Trust"
+      },
+      {
+        "ETC_Code": 402,
+        "Name": "Discr Beneficiary Distribution from Trust-Cap",
+        "Description": "Beneficiary Distribution from Trust – Capital"
+      },
+      {
+        "ETC_Code": 403,
+        "Name": "Discr Trust Distribution to Beneficiary",
+        "Description": "Trust Distribution to Beneficiary"
+      },
+      {
+        "ETC_Code": 404,
+        "Name": "Discr Trust Distribution to Beneficiary-Cap",
+        "Description": "Trust Distribution to Beneficiary – Capital"
+      },
+      {
+        "ETC_Code": 411,
+        "Name": "Non-Discr Beneficiary Distribution from Trust",
+        "Description": "Non-Discretionary Beneficiary Distribution from Trust"
+      },
+      {
+        "ETC_Code": 412,
+        "Name": "Non-Discr Beneficiary Distribution from Trust-Cap",
+        "Description": "Non-Discretionary Beneficiary Distribution from Trust – Capital"
+      },
+      {
+        "ETC_Code": 413,
+        "Name": "Non-Discr Trust Distribution to Beneficiary",
+        "Description": "Non-Discretionary Trust Distribution to Beneficiary"
+      },
+      {
+        "ETC_Code": 414,
+        "Name": "Non-Discr Trust Distribution to Beneficiary-Cap",
+        "Description": "Non-Discretionary Trust Distribution to Beneficiary – Capital"
+      },
+      {
+        "ETC_Code": 704,
+        "Name": "Partnership Contribution in Kind",
+        "Description": "Unrealized Gain/Loss on Contribution to Partnership"
+      },
+      {
+        "ETC_Code": 705,
+        "Name": "Grandfathering LTCG",
+        "Description": "The capital gain or loss for grandfathering LTCG is recorded by this ETC"
+      },
+      {
+        "ETC_Code": 1233,
+        "Name": "Avg Cost Adj",
+        "Description": "For Avg Cost Adj, adjusts tax cost of a position for the average cost of an asset within an account (no units change and no net performance impact)"
+      }  
+    ]
+   }
