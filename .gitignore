@@ -1,6 +1,6 @@
-eton-ai-backend/node_modules/
-eton-ai-backend/.env
-eton-ai-backend/src/generated/prisma/
+semantic-transaction-classifier-backend/node_modules/
+semantic-transaction-classifier-backend/.env
+semantic-transaction-classifier-backend/src/generated/prisma/
 
 eton-ai-frontend/node_modules/
 eton-ai-frontend/.env

@@ -1,0 +1,32 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model TransactionCategory {
+  categoryCode   String        @id
+  categoryName   String
+  categoryDescription String
+  transactions   Transaction[]
+}
+
+model Transaction {
+  id                    String               @id @default(uuid())
+  transactionDate       DateTime
+  description           String
+  amount                Decimal
+  accountNumber         String
+  cusip                 String?
+
+  predictedCategoryCode String?
+  predictedCategory     TransactionCategory? @relation(fields: [predictedCategoryCode], references: [categoryCode])
+
+  confidenceScore       Float?
+  finalCategoryCode     String?
+  reviewStatus          String               @default("PENDING")
+  createdAt             DateTime             @default(now())
+}

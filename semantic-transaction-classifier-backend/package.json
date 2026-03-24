@@ -1,7 +1,7 @@
 {
-  "name": "eton-ai-backend",
+  "name": "semantic-transaction-classifier-backend",
   "version": "1.0.0",
-  "description": "",
+  "description": "Backend API for a generalized AI-powered transaction category classification system.",
   "main": "index.js",
   "scripts": {
     "start": "node server.js",

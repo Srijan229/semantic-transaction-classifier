@@ -1,0 +1,52 @@
+[
+  {
+    "code": "T01",
+    "name": "Cash Inflow",
+    "description": "Incoming cash movement such as a deposit or credit into an account."
+  },
+  {
+    "code": "T02",
+    "name": "Cash Outflow",
+    "description": "Outgoing cash movement such as a withdrawal, payment, or debit from an account."
+  },
+  {
+    "code": "T03",
+    "name": "Equity Purchase",
+    "description": "Purchase of an equity security or related investment instrument."
+  },
+  {
+    "code": "T04",
+    "name": "Equity Sale",
+    "description": "Sale of an equity security or related investment instrument."
+  },
+  {
+    "code": "T05",
+    "name": "Dividend Income",
+    "description": "Dividend cash flow received from an investment holding."
+  },
+  {
+    "code": "T06",
+    "name": "Interest Income",
+    "description": "Interest credited from a cash balance, bond, or other interest-bearing instrument."
+  },
+  {
+    "code": "T07",
+    "name": "Management Fee",
+    "description": "Account-level advisory, custody, or management-related fee charge."
+  },
+  {
+    "code": "T08",
+    "name": "Tax Adjustment",
+    "description": "Tax withholding, tax payment, or tax-related adjustment linked to a transaction."
+  },
+  {
+    "code": "T09",
+    "name": "Internal Transfer",
+    "description": "Transfer of cash between internal accounts or ledgers."
+  },
+  {
+    "code": "T10",
+    "name": "Ignore / Non-actionable",
+    "description": "Non-trade, bookkeeping, or otherwise non-actionable transaction."
+  }
+]

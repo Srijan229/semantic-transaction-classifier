@@ -11,13 +11,13 @@ exports.getAll = async (req, res) => {
     if (req.query.accountNumber) {
       filters.accountNumber = req.query.accountNumber;
     }
-    if (req.query.predictedEtcCode) {
-      filters.predictedEtcCode = parseInt(req.query.predictedEtcCode);
+    if (req.query.predictedCategoryCode) {
+      filters.predictedCategoryCode = req.query.predictedCategoryCode;
     }
 
     const transactions = await prisma.transaction.findMany({
       where: filters,
-      include: { predictedEtc: true },
+      include: { predictedCategory: true },
       orderBy: { createdAt: 'desc' }
     });
 
@@ -38,7 +38,7 @@ exports.getOne = async (req, res) => {
 
     const transaction = await prisma.transaction.findUnique({
       where: { id: id },
-      include: { predictedEtc: true }
+      include: { predictedCategory: true }
     });
 
     if (!transaction) {
@@ -56,10 +56,10 @@ exports.getOne = async (req, res) => {
 exports.override = async (req, res) => {
   try {
     const { id } = req.params;
-    const { finalEtcCode } = req.body;
+    const { finalCategoryCode } = req.body;
 
-    if (finalEtcCode === undefined || finalEtcCode === null) {
-      return res.status(400).json({ error: "finalEtcCode is required in the request body" });
+    if (finalCategoryCode === undefined || finalCategoryCode === null) {
+      return res.status(400).json({ error: "finalCategoryCode is required in the request body" });
     }
 
     const existing = await prisma.transaction.findUnique({ where: { id } });
@@ -67,29 +67,31 @@ exports.override = async (req, res) => {
       return res.status(404).json({ error: "Transaction not found" });
     }
 
-    const etcExists = await prisma.etcMaster.findUnique({ where: { etcCode: finalEtcCode } });
-    if (!etcExists) {
-      return res.status(400).json({ error: `ETC Code ${finalEtcCode} does not exist in the master table` });
+    const categoryExists = await prisma.transactionCategory.findUnique({
+      where: { categoryCode: finalCategoryCode },
+    });
+    if (!categoryExists) {
+      return res.status(400).json({ error: `Transaction category code ${finalCategoryCode} does not exist in the master table` });
     }
 
-    const newStatus = (existing.predictedEtcCode === finalEtcCode) ? "REVIEWED" : "OVERRIDDEN";
+    const newStatus = (existing.predictedCategoryCode === finalCategoryCode) ? "REVIEWED" : "OVERRIDDEN";
 
     const updated = await prisma.transaction.update({
       where: { id },
       data: {
-        finalEtcCode: finalEtcCode,
+        finalCategoryCode: finalCategoryCode,
         reviewStatus: newStatus
       },
-      include: { predictedEtc: true }
+      include: { predictedCategory: true }
     });
 
     res.json({
       message: `Transaction ${newStatus.toLowerCase()} successfully`,
       transactionId: updated.id,
-      predictedEtcCode: updated.predictedEtcCode,
-      predictedEtcName: updated.predictedEtc ? updated.predictedEtc.name : "Unknown",
-      finalEtcCode: updated.finalEtcCode,
-      finalEtcName: etcExists.name,
+      predictedCategoryCode: updated.predictedCategoryCode,
+      predictedCategoryName: updated.predictedCategory ? updated.predictedCategory.categoryName : "Unknown",
+      finalCategoryCode: updated.finalCategoryCode,
+      finalCategoryName: categoryExists.categoryName,
       reviewStatus: updated.reviewStatus
     });
 
