@@ -1,0 +1,364 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #f3efe7;
+  --panel: rgba(255, 252, 247, 0.84);
+  --panel-strong: #fffaf2;
+  --text: #231d17;
+  --muted: #6a6054;
+  --line: rgba(71, 52, 35, 0.12);
+  --accent: #0d5c63;
+  --accent-soft: #d9ecee;
+  --accent-strong: #16404d;
+  --danger: #9f3d2f;
+  --shadow: 0 18px 50px rgba(42, 32, 23, 0.1);
+  --sans: "Avenir Next", "Segoe UI", sans-serif;
+  --serif: "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+  color: var(--text);
+  background:
+    radial-gradient(circle at top left, rgba(13, 92, 99, 0.12), transparent 26%),
+    radial-gradient(circle at right center, rgba(159, 61, 47, 0.08), transparent 24%),
+    var(--bg);
+  font-family: var(--sans);
+  line-height: 1.5;
+  font-weight: 400;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+.app-shell {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 320px minmax(0, 1fr);
+}
+
+.sidebar {
+  padding: 2rem;
+  border-right: 1px solid var(--line);
+  background: rgba(255, 248, 239, 0.72);
+  backdrop-filter: blur(18px);
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.brand-block h1,
+.hero-panel h2,
+.panel-header h2 {
+  margin: 0;
+  font-family: var(--serif);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+}
+
+.brand-block h1 {
+  font-size: clamp(2.2rem, 3vw, 3.4rem);
+  margin-bottom: 1rem;
+}
+
+.lede,
+.hero-panel p,
+.sidebar-note p {
+  color: var(--muted);
+}
+
+.eyebrow {
+  margin: 0 0 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.74rem;
+  color: var(--accent-strong);
+}
+
+.nav-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: var(--text);
+  padding: 0.95rem 1rem;
+  border: 1px solid transparent;
+  border-radius: 1rem;
+  transition: 180ms ease;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  background: var(--panel-strong);
+  border-color: var(--line);
+  box-shadow: var(--shadow);
+}
+
+.sidebar-note {
+  margin-top: auto;
+  padding: 1rem;
+  border-radius: 1rem;
+  background: linear-gradient(140deg, rgba(13, 92, 99, 0.08), rgba(255, 250, 242, 0.95));
+  border: 1px solid var(--line);
+}
+
+.sidebar-note strong {
+  display: block;
+  margin-top: 0.35rem;
+}
+
+.main-panel {
+  padding: 2rem;
+}
+
+.page-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.hero-panel,
+.panel,
+.metric-card {
+  border: 1px solid var(--line);
+  border-radius: 1.4rem;
+  background: var(--panel);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(20px);
+}
+
+.hero-panel,
+.panel {
+  padding: 1.5rem;
+}
+
+.panel-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.card-grid.compact {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.metric-card {
+  padding: 1rem 1.1rem;
+}
+
+.metric-card p {
+  margin: 0 0 0.45rem;
+  color: var(--muted);
+}
+
+.metric-card strong {
+  font-size: 1.8rem;
+  font-family: var(--serif);
+}
+
+.filter-grid,
+.split-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.split-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.field span {
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.field input,
+.field select,
+.upload-dropzone input {
+  width: 100%;
+  border: 1px solid var(--line);
+  background: var(--panel-strong);
+  border-radius: 0.95rem;
+  padding: 0.85rem 1rem;
+  color: var(--text);
+}
+
+.table-wrap {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  text-align: left;
+  padding: 1rem 0.9rem;
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+}
+
+th {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+}
+
+.description-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.description-cell span {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.pill {
+  display: inline-flex;
+  padding: 0.35rem 0.7rem;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--accent-strong);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.pagination-bar,
+.upload-actions {
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.pagination-bar button,
+.upload-actions button {
+  border: 0;
+  border-radius: 999px;
+  padding: 0.8rem 1.1rem;
+  background: var(--accent-strong);
+  color: #f5f1ea;
+}
+
+.pagination-bar button:disabled,
+.upload-actions button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.upload-dropzone {
+  padding: 1.25rem;
+  border: 1px dashed rgba(13, 92, 99, 0.35);
+  background: linear-gradient(145deg, rgba(217, 236, 238, 0.58), rgba(255, 250, 242, 0.9));
+  border-radius: 1rem;
+}
+
+.code-block {
+  padding: 1rem;
+  border-radius: 1rem;
+  background: #1f2328;
+  color: #f6f0e6;
+  font-family: "Cascadia Code", Consolas, monospace;
+  overflow-x: auto;
+}
+
+.result-list {
+  margin: 0;
+  padding-left: 1.15rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.empty-state {
+  text-align: center;
+  color: var(--muted);
+}
+
+.error-text {
+  color: var(--danger);
+  margin-top: 0.75rem;
+}
+
+@media (max-width: 1080px) {
+  .app-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .card-grid,
+  .card-grid.compact,
+  .filter-grid,
+  .split-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 720px) {
+  .main-panel,
+  .sidebar {
+    padding: 1.1rem;
+  }
+
+  .card-grid,
+  .card-grid.compact,
+  .filter-grid,
+  .split-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .pagination-bar,
+  .upload-actions,
+  .panel-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

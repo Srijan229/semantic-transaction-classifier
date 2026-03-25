@@ -26,6 +26,7 @@ model Transaction {
   predictedCategory     TransactionCategory? @relation(fields: [predictedCategoryCode], references: [categoryCode])
 
   confidenceScore       Float?
+  classificationMethod  String?
   finalCategoryCode     String?
   reviewStatus          String               @default("PENDING")
   createdAt             DateTime             @default(now())

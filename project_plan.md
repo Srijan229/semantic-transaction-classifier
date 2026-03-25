@@ -25,6 +25,7 @@ Semantic Transaction Classifier is a public-safe demonstration project for AI-as
    - CSV upload workflow
    - review dashboard
    - summary metrics
+   - paginated review table
 
 ## Generalized Taxonomy
 
@@ -70,10 +71,26 @@ Semantic Transaction Classifier is a public-safe demonstration project for AI-as
 }
 ```
 
+## Frontend-Ready API Additions
+
+- `GET /api/v1/transactions` now supports pagination, sorting, text search, and filter metadata
+- `GET /api/v1/transactions/summary` provides dashboard-ready aggregate counts
+- `POST /api/v1/uploads/transactions` accepts CSV uploads and returns import plus classification summaries
+
+## Example Upload Workflow
+
+The planned frontend flow is:
+
+1. Upload a CSV file
+2. Validate rows and reject malformed inputs
+3. Classify accepted rows in batch
+4. Save predictions with `classificationMethod`
+5. Review results in a paginated dashboard table
+
 ## Next Milestones
 
-1. Add CSV upload for batch classification
-2. Build a frontend review dashboard
-3. Add pagination, filtering, and summary metrics
-4. Add configurable AI provider modes
-5. Add a local or privacy-preserving semantic matching option
+1. Build a frontend review dashboard
+2. Add upload UI with import feedback
+3. Add configurable AI provider modes
+4. Add a local or privacy-preserving semantic matching option
+5. Add stronger validation and richer import error reporting

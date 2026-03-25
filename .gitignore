@@ -2,7 +2,7 @@ semantic-transaction-classifier-backend/node_modules/
 semantic-transaction-classifier-backend/.env
 semantic-transaction-classifier-backend/src/generated/prisma/
 
-eton-ai-frontend/node_modules/
-eton-ai-frontend/.env
-eton-ai-frontend/dist/
-eton-ai-frontend/build/
+semantic-transaction-classifier-frontend/node_modules/
+semantic-transaction-classifier-frontend/.env
+semantic-transaction-classifier-frontend/dist/
+semantic-transaction-classifier-frontend/build/

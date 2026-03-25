@@ -2,8 +2,41 @@ const {
   classifySingleTransaction,
   classifyTransactions,
 } = require('../services/classification/classificationService');
+const { buildImportPayload } = require('../services/classification/csvImportService');
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
+
+async function saveClassifiedTransactions(results) {
+  const savedTransactions = [];
+
+  for (const result of results) {
+    const saved = await prisma.transaction.create({
+      data: {
+        transactionDate: new Date(result.transactionDate || Date.now()),
+        description: result.description || "",
+        amount: result.amount || 0,
+        accountNumber: result.accountNumber || "UNKNOWN",
+        cusip: result.cusip || null,
+        predictedCategoryCode: result.predictedCategoryCode,
+        confidenceScore: result.confidenceScore,
+        classificationMethod: result.classificationMethod,
+        reviewStatus: "PENDING"
+      }
+    });
+
+    savedTransactions.push({
+      transactionId: saved.id,
+      description: result.description,
+      predictedCategoryCode: result.predictedCategoryCode,
+      confidenceScore: result.confidenceScore,
+      classificationMethod: result.classificationMethod,
+      matchedKeyword: result.matchedKeyword,
+      reasoning: result.reasoning,
+    });
+  }
+
+  return savedTransactions;
+}
 
 exports.classify = async (req, res) => {
   try {
@@ -32,6 +65,7 @@ exports.classify = async (req, res) => {
         cusip: cusip || null,
         predictedCategoryCode: finalPrediction.predictedCategoryCode,
         confidenceScore: finalPrediction.confidenceScore,
+        classificationMethod: finalPrediction.classificationMethod,
         reviewStatus: "PENDING"
       }
     });
@@ -63,31 +97,7 @@ exports.classifyBatch = async (req, res) => {
 
     const categoryList = await prisma.transactionCategory.findMany();
     const results = await classifyTransactions(transactions, categoryList);
-
-    const savedTransactions = [];
-    for (const r of results) {
-      const saved = await prisma.transaction.create({
-        data: {
-          transactionDate: new Date(r.transactionDate || Date.now()),
-          description: r.description || "",
-          amount: r.amount || 0,
-          accountNumber: r.accountNumber || "UNKNOWN",
-          cusip: r.cusip || null,
-          predictedCategoryCode: r.predictedCategoryCode,
-          confidenceScore: r.confidenceScore,
-          reviewStatus: "PENDING"
-        }
-      });
-      savedTransactions.push({
-        transactionId: saved.id,
-        description: r.description,
-        predictedCategoryCode: r.predictedCategoryCode,
-        confidenceScore: r.confidenceScore,
-        classificationMethod: r.classificationMethod,
-        matchedKeyword: r.matchedKeyword,
-        reasoning: r.reasoning
-      });
-    }
+    const savedTransactions = await saveClassifiedTransactions(results);
 
     res.json({
       totalProcessed: savedTransactions.length,
@@ -100,5 +110,44 @@ exports.classifyBatch = async (req, res) => {
   } catch (error) {
     console.error("Batch Classification Error:", error);
     res.status(500).json({ error: "Internal server error during batch classification" });
+  }
+};
+
+exports.uploadCsv = async (req, res) => {
+  try {
+    if (!req.file || !req.file.buffer) {
+      return res.status(400).json({ error: 'A CSV file is required under the "file" field.' });
+    }
+
+    const { validTransactions, rejectedRows } = buildImportPayload(req.file.buffer);
+
+    if (validTransactions.length === 0) {
+      return res.status(400).json({
+        error: 'No valid transaction rows were found in the uploaded CSV.',
+        rejectedRows,
+      });
+    }
+
+    const categoryList = await prisma.transactionCategory.findMany();
+    const results = await classifyTransactions(validTransactions, categoryList);
+    const savedTransactions = await saveClassifiedTransactions(results);
+
+    res.json({
+      importSummary: {
+        totalRows: validTransactions.length + rejectedRows.length,
+        acceptedRows: validTransactions.length,
+        rejectedRows: rejectedRows.length,
+      },
+      classificationSummary: {
+        keywordMatched: results.filter((result) => result.classificationMethod === 'RULE_ENGINE').length,
+        aiMatched: results.filter((result) => result.classificationMethod === 'GEMINI_AI').length,
+        fallback: results.filter((result) => result.classificationMethod === 'FALLBACK').length,
+      },
+      rejectedRows,
+      results: savedTransactions,
+    });
+  } catch (error) {
+    console.error('CSV Upload Error:', error);
+    res.status(500).json({ error: 'Internal server error during CSV upload processing' });
   }
 };

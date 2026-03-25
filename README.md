@@ -15,17 +15,83 @@ This project uses synthetic data and a generalized financial classification sche
 - AI fallback classification for ambiguous descriptions
 - Privacy-minimized payloads for external AI calls
 - Batch transaction processing
+- CSV upload for batch import
 - Review and override workflow
 - Transaction category master lookup
+- Pagination, sorting, search, and summary APIs for dashboard use
 
 ## API Endpoints
 
 - `POST /api/v1/tcc/classify-transaction`
 - `POST /api/v1/tcc/classify-batch`
+- `POST /api/v1/uploads/transactions`
 - `GET /api/v1/transactions`
+- `GET /api/v1/transactions/summary`
 - `GET /api/v1/transactions/:id`
 - `PUT /api/v1/transactions/:id/override`
 - `GET /api/v1/transaction-category-codes`
+
+## Frontend-Ready Backend Contracts
+
+`GET /api/v1/transactions` supports:
+
+- `page`
+- `pageSize`
+- `sortBy`
+- `sortOrder`
+- `search`
+- `reviewStatus`
+- `accountNumber`
+- `predictedCategoryCode`
+
+Response shape:
+
+```json
+{
+  "data": [],
+  "pagination": {
+    "page": 1,
+    "pageSize": 25,
+    "totalCount": 0,
+    "totalPages": 0
+  },
+  "filters": {
+    "reviewStatus": null,
+    "accountNumber": null,
+    "predictedCategoryCode": null,
+    "search": null
+  },
+  "sort": {
+    "sortBy": "createdAt",
+    "sortOrder": "desc"
+  }
+}
+```
+
+`GET /api/v1/transactions/summary` returns:
+
+```json
+{
+  "totals": {
+    "transactions": 0,
+    "pendingReview": 0,
+    "reviewed": 0,
+    "overridden": 0
+  },
+  "classificationBreakdown": {
+    "ruleMatched": 0,
+    "aiMatched": 0,
+    "fallbackMatched": 0
+  }
+}
+```
+
+`POST /api/v1/uploads/transactions` expects a multipart form upload with a CSV file under the `file` field.
+
+Supported CSV columns:
+
+- required: `description`
+- optional: `transactionDate`, `amount`, `accountNumber`, `cusip`
 
 ## Generalized Category Schema
 
@@ -56,6 +122,15 @@ The backend ships with a synthetic transaction category taxonomy:
 - `EQUITY PURCHASE EXECUTED`
 - `EQUITY SALE SETTLED`
 - `NON-TRADE BOOKKEEPING ENTRY`
+
+## Example Upload CSV
+
+```csv
+transactionDate,description,amount,accountNumber,cusip
+2026-03-24,DIVIDEND PAYMENT RECEIVED,125.50,DEMO-001,
+2026-03-24,CLIENT CASH WITHDRAWAL,-80.00,DEMO-002,
+2026-03-24,MONTH END JOURNAL RECLASS ENTRY,0,DEMO-003,
+```
 
 ## Tech Stack
 
