@@ -44,7 +44,8 @@ body {
 
 button,
 input,
-select {
+select,
+textarea {
   font: inherit;
 }
 
@@ -297,6 +298,40 @@ th {
   border-radius: 1rem;
 }
 
+.mode-toggle {
+  display: inline-flex;
+  gap: 0.5rem;
+  padding: 0.35rem;
+  border-radius: 999px;
+  background: rgba(255, 250, 242, 0.82);
+  border: 1px solid var(--line);
+  width: fit-content;
+}
+
+.toggle-pill {
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  padding: 0.7rem 1rem;
+  border-radius: 999px;
+}
+
+.toggle-pill.active {
+  background: var(--accent-strong);
+  color: #f5f1ea;
+}
+
+.paste-textarea {
+  width: 100%;
+  min-height: 220px;
+  border: 1px solid var(--line);
+  background: var(--panel-strong);
+  border-radius: 0.95rem;
+  padding: 0.95rem 1rem;
+  color: var(--text);
+  resize: vertical;
+}
+
 .code-block {
   padding: 1rem;
   border-radius: 1rem;
@@ -322,6 +357,11 @@ th {
 .error-text {
   color: var(--danger);
   margin-top: 0.75rem;
+}
+
+.helper-copy {
+  margin-top: 0.9rem;
+  color: var(--muted);
 }
 
 @media (max-width: 1080px) {

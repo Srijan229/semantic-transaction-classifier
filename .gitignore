@@ -1,8 +1,10 @@
 semantic-transaction-classifier-backend/node_modules/
 semantic-transaction-classifier-backend/.env
 semantic-transaction-classifier-backend/src/generated/prisma/
+semantic-transaction-classifier-backend/*.log
 
 semantic-transaction-classifier-frontend/node_modules/
 semantic-transaction-classifier-frontend/.env
 semantic-transaction-classifier-frontend/dist/
 semantic-transaction-classifier-frontend/build/
+semantic-transaction-classifier-frontend/*.log

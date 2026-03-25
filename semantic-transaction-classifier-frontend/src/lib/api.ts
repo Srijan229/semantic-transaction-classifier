@@ -1,4 +1,5 @@
 import type {
+  BatchClassificationResponse,
   CategoryListResponse,
   SummaryResponse,
   TransactionListResponse,
@@ -56,5 +57,25 @@ export async function uploadTransactionsCsv(file: File): Promise<UploadResponse>
   return request<UploadResponse>('/api/v1/uploads/transactions', {
     method: 'POST',
     body: formData,
+  })
+}
+
+export async function classifyPastedDescriptions(
+  descriptions: string[],
+): Promise<BatchClassificationResponse> {
+  return request<BatchClassificationResponse>('/api/v1/tcc/classify-batch', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      transactions: descriptions.map((description, index) => ({
+        description,
+        transactionDate: new Date().toISOString(),
+        amount: 0,
+        accountNumber: `PASTED-${String(index + 1).padStart(3, '0')}`,
+        cusip: null,
+      })),
+    }),
   })
 }

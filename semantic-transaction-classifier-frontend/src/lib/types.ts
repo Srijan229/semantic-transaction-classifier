@@ -87,3 +87,11 @@ export type UploadResponse = {
     reasoning: string | null
   }>
 }
+
+export type BatchClassificationResponse = {
+  totalProcessed: number
+  keywordMatched: number
+  aiMatched: number
+  fallback: number
+  results: UploadResponse['results']
+}

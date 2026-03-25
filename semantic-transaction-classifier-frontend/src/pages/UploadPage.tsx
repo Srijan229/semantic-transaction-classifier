@@ -9,9 +9,9 @@ export function UploadPage() {
     <div className="page-stack">
       <section className="hero-panel">
         <p className="eyebrow">Ingestion workflow</p>
-        <h2>Import transaction batches from CSV</h2>
+        <h2>Import transaction batches from CSV or pasted text</h2>
         <p>
-          Upload synthetic transaction files, validate rows, classify accepted entries, and inspect rejected records immediately.
+          Upload synthetic transaction files or paste one description per line, then classify accepted entries and inspect the results immediately.
         </p>
       </section>
 
@@ -20,12 +20,15 @@ export function UploadPage() {
       <section className="panel">
         <div className="panel-header">
           <div>
-            <p className="eyebrow">Accepted format</p>
-            <h2>Supported CSV columns</h2>
+            <p className="eyebrow">Accepted formats</p>
+            <h2>CSV columns and pasted text input</h2>
           </div>
         </div>
 
         <div className="code-block">transactionDate,description,amount,accountNumber,cusip</div>
+        <p className="helper-copy">
+          For pasted text, enter one description per line and the app will count and classify them as a batch.
+        </p>
       </section>
 
       {lastUpload ? (
@@ -77,7 +80,7 @@ export function UploadPage() {
               <ul className="result-list">
                 {lastUpload.results.map((result) => (
                   <li key={result.transactionId}>
-                    {result.predictedCategoryCode} · {result.description}
+                    {result.predictedCategoryCode} - {result.description}
                   </li>
                 ))}
               </ul>
