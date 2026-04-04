@@ -55,7 +55,7 @@ exports.getAll = async (req, res) => {
       prisma.transaction.count({ where }),
       prisma.transaction.findMany({
         where,
-        include: { predictedCategory: true },
+        include: { predictedCategory: true, finalCategory: true },
         orderBy: { [sortBy]: sortOrder },
         skip: (page - 1) * pageSize,
         take: pageSize,
@@ -134,7 +134,7 @@ exports.getOne = async (req, res) => {
 
     const transaction = await prisma.transaction.findUnique({
       where: { id: id },
-      include: { predictedCategory: true },
+      include: { predictedCategory: true, finalCategory: true },
     });
 
     if (!transaction) {
@@ -178,7 +178,7 @@ exports.override = async (req, res) => {
         finalCategoryCode: finalCategoryCode,
         reviewStatus: newStatus
       },
-      include: { predictedCategory: true }
+      include: { predictedCategory: true, finalCategory: true }
     });
 
     res.json({

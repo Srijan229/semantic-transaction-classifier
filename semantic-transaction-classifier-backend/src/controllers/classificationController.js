@@ -20,6 +20,8 @@ async function saveClassifiedTransactions(results) {
         predictedCategoryCode: result.predictedCategoryCode,
         confidenceScore: result.confidenceScore,
         classificationMethod: result.classificationMethod,
+        matchedKeyword: result.matchedKeyword || null,
+        reasoning: result.reasoning || null,
         reviewStatus: "PENDING"
       }
     });
@@ -66,6 +68,8 @@ exports.classify = async (req, res) => {
         predictedCategoryCode: finalPrediction.predictedCategoryCode,
         confidenceScore: finalPrediction.confidenceScore,
         classificationMethod: finalPrediction.classificationMethod,
+        matchedKeyword: finalPrediction.matchedKeyword || null,
+        reasoning: finalPrediction.reasoning || null,
         reviewStatus: "PENDING"
       }
     });

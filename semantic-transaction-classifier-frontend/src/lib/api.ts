@@ -1,7 +1,9 @@
 import type {
   BatchClassificationResponse,
   CategoryListResponse,
+  OverrideResponse,
   SummaryResponse,
+  Transaction,
   TransactionListResponse,
   UploadResponse,
 } from './types'
@@ -50,6 +52,10 @@ export function getTransactionCategories(): Promise<CategoryListResponse> {
   return request<CategoryListResponse>('/api/v1/transaction-category-codes')
 }
 
+export function getTransaction(transactionId: string): Promise<Transaction> {
+  return request<Transaction>(`/api/v1/transactions/${transactionId}`)
+}
+
 export async function uploadTransactionsCsv(file: File): Promise<UploadResponse> {
   const formData = new FormData()
   formData.append('file', file)
@@ -77,5 +83,18 @@ export async function classifyPastedDescriptions(
         cusip: null,
       })),
     }),
+  })
+}
+
+export async function overrideTransactionCategory(
+  transactionId: string,
+  finalCategoryCode: string,
+): Promise<OverrideResponse> {
+  return request<OverrideResponse>(`/api/v1/transactions/${transactionId}/override`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ finalCategoryCode }),
   })
 }

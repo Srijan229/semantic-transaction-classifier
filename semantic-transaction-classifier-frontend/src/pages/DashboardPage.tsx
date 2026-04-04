@@ -1,9 +1,11 @@
 import { useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { getTransactionCategories, getTransactionSummary, getTransactions } from '../lib/api'
+import { ReviewDrawer } from '../components/ReviewDrawer'
 import { SummaryCards } from '../components/SummaryCards'
 import { TransactionFilters, type DashboardFilters } from '../components/TransactionFilters'
 import { TransactionTable } from '../components/TransactionTable'
+import type { Transaction } from '../lib/types'
 
 export function DashboardPage() {
   const [page, setPage] = useState(1)
@@ -12,6 +14,7 @@ export function DashboardPage() {
     reviewStatus: '',
     predictedCategoryCode: '',
   })
+  const [selectedTransaction, setSelectedTransaction] = useState<Transaction | null>(null)
 
   const summaryQuery = useQuery({
     queryKey: ['transaction-summary'],
@@ -65,6 +68,13 @@ export function DashboardPage() {
         page={transactionsQuery.data?.pagination.page ?? 1}
         totalPages={transactionsQuery.data?.pagination.totalPages ?? 1}
         onPageChange={setPage}
+        onReview={setSelectedTransaction}
+      />
+
+      <ReviewDrawer
+        transaction={selectedTransaction}
+        categories={categoriesQuery.data?.categoryCodes ?? []}
+        onClose={() => setSelectedTransaction(null)}
       />
     </div>
   )

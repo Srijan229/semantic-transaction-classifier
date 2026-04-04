@@ -16,7 +16,10 @@ export type Transaction = {
   predictedCategoryCode: string | null
   confidenceScore: number | null
   classificationMethod: ClassificationMethod | null
+  matchedKeyword?: string | null
+  reasoning?: string | null
   finalCategoryCode: string | null
+  finalCategory?: TransactionCategory | null
   reviewStatus: string
   createdAt: string
   predictedCategory?: TransactionCategory | null
@@ -94,4 +97,14 @@ export type BatchClassificationResponse = {
   aiMatched: number
   fallback: number
   results: UploadResponse['results']
+}
+
+export type OverrideResponse = {
+  message: string
+  transactionId: string
+  predictedCategoryCode: string
+  predictedCategoryName: string
+  finalCategoryCode: string
+  finalCategoryName: string
+  reviewStatus: string
 }

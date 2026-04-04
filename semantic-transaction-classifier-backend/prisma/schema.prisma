@@ -8,10 +8,11 @@ datasource db {
 }
 
 model TransactionCategory {
-  categoryCode   String        @id
-  categoryName   String
-  categoryDescription String
-  transactions   Transaction[]
+  categoryCode          String        @id
+  categoryName          String
+  categoryDescription   String
+  predictedTransactions Transaction[] @relation("PredictedCategory")
+  finalTransactions     Transaction[] @relation("FinalCategory")
 }
 
 model Transaction {
@@ -23,11 +24,14 @@ model Transaction {
   cusip                 String?
 
   predictedCategoryCode String?
-  predictedCategory     TransactionCategory? @relation(fields: [predictedCategoryCode], references: [categoryCode])
+  predictedCategory     TransactionCategory? @relation("PredictedCategory", fields: [predictedCategoryCode], references: [categoryCode])
 
   confidenceScore       Float?
   classificationMethod  String?
+  matchedKeyword        String?
+  reasoning             String?
   finalCategoryCode     String?
+  finalCategory         TransactionCategory? @relation("FinalCategory", fields: [finalCategoryCode], references: [categoryCode])
   reviewStatus          String               @default("PENDING")
   createdAt             DateTime             @default(now())
 }

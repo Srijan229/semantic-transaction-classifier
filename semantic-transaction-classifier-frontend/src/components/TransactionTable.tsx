@@ -5,6 +5,7 @@ type TransactionTableProps = {
   page: number
   totalPages: number
   onPageChange: (page: number) => void
+  onReview: (transaction: Transaction) => void
 }
 
 function formatAmount(amount: string | number) {
@@ -20,7 +21,7 @@ function formatAmount(amount: string | number) {
   }).format(numeric)
 }
 
-export function TransactionTable({ transactions, page, totalPages, onPageChange }: TransactionTableProps) {
+export function TransactionTable({ transactions, page, totalPages, onPageChange, onReview }: TransactionTableProps) {
   return (
     <section className="panel">
       <div className="table-wrap">
@@ -33,12 +34,13 @@ export function TransactionTable({ transactions, page, totalPages, onPageChange 
               <th>Predicted Code</th>
               <th>Method</th>
               <th>Status</th>
+              <th>Action</th>
             </tr>
           </thead>
           <tbody>
             {transactions.length === 0 ? (
               <tr>
-                <td colSpan={6} className="empty-state">
+                <td colSpan={7} className="empty-state">
                   No transactions match the current filters.
                 </td>
               </tr>
@@ -58,6 +60,11 @@ export function TransactionTable({ transactions, page, totalPages, onPageChange 
                   </td>
                   <td>{transaction.classificationMethod ?? 'N/A'}</td>
                   <td>{transaction.reviewStatus}</td>
+                  <td>
+                    <button type="button" className="ghost-button" onClick={() => onReview(transaction)}>
+                      Review
+                    </button>
+                  </td>
                 </tr>
               ))
             )}
