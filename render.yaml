@@ -2,19 +2,15 @@ services:
   - type: web
     name: semantic-transaction-classifier-api
     runtime: node
+    plan: free
     rootDir: semantic-transaction-classifier-backend
     buildCommand: npm ci && npx prisma generate
     startCommand: npm run render:start
     healthCheckPath: /health
     envVars:
       - key: DATABASE_URL
-        fromDatabase:
-          name: semantic-transaction-classifier-db
-          property: connectionString
+        sync: false
       - key: AI_PROVIDER_API_KEY
         sync: false
       - key: CORS_ORIGIN
         sync: false
-
-databases:
-  - name: semantic-transaction-classifier-db

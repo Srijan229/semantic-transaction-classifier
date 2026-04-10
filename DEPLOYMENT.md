@@ -5,26 +5,34 @@ This repo is split into two deployable apps:
 - `semantic-transaction-classifier-backend`: Express API, Prisma, PostgreSQL
 - `semantic-transaction-classifier-frontend`: Vite React app
 
-The simplest production setup is:
+The free production setup is:
 
-- Backend and PostgreSQL on Render
-- Frontend on Vercel
+- Backend on Render free web service
+- PostgreSQL on Neon free tier
+- Frontend on Vercel hobby/free tier
+
+Do not create a Render-managed PostgreSQL database for a free long-running demo. Render's free PostgreSQL option is temporary, so this guide uses Neon for the database.
+
+## Database: Neon
+
+1. Create a Neon account.
+2. Create a free PostgreSQL project.
+3. Copy the pooled or direct PostgreSQL connection string.
+4. Keep it ready as `DATABASE_URL`.
 
 ## Backend: Render
 
 1. Push this repository to GitHub.
 2. In Render, create a new Blueprint from the repository.
 3. Render will read `render.yaml` and create:
-   - a PostgreSQL database
-   - a Node web service rooted at `semantic-transaction-classifier-backend`
+   - a free Node web service rooted at `semantic-transaction-classifier-backend`
 4. Set these backend environment variables in Render:
 
 ```bash
+DATABASE_URL=your_neon_postgres_connection_string
 AI_PROVIDER_API_KEY=your_google_genai_api_key
 CORS_ORIGIN=https://your-frontend-domain.vercel.app
 ```
-
-`DATABASE_URL` is wired automatically by `render.yaml`.
 
 The backend build command is:
 
