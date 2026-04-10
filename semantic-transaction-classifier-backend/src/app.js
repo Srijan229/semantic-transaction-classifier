@@ -7,7 +7,20 @@ const uploadRoutes = require('./routes/uploadRoutes');
 
 const app = express();
 
-app.use(cors());
+const allowedOrigins = (process.env.CORS_ORIGIN || '')
+  .split(',')
+  .map((origin) => origin.trim())
+  .filter(Boolean);
+
+app.use(cors({
+  origin(origin, callback) {
+    if (!origin || allowedOrigins.length === 0 || allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    }
+
+    return callback(new Error('Not allowed by CORS'));
+  },
+}));
 app.use(express.json());
 
 app.use('/api/v1/tcc', classificationRoutes);
@@ -17,6 +30,10 @@ app.use('/api/v1/uploads', uploadRoutes);
 
 app.get('/', (req, res) => {
   res.json({ message: 'Semantic Transaction Classifier API is running.' });
+});
+
+app.get('/health', (req, res) => {
+  res.json({ status: 'ok' });
 });
 
 module.exports = app;

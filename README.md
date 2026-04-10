@@ -173,6 +173,10 @@ node prisma/seed.js
 npm run dev
 ```
 
+## Deployment
+
+See [DEPLOYMENT.md](./DEPLOYMENT.md) for a production deployment path using Render for the backend/PostgreSQL database and Vercel for the frontend.
+
 ## Portfolio Positioning
 
 This repository is designed as a public-safe portfolio project focused on classification architecture, API design, privacy-aware AI integration, and human-in-the-loop review workflows.
